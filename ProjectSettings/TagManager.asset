@@ -8,6 +8,9 @@ TagManager:
   - Bullett
   - Coin
   - Enermy
+  - BayGai
+  - Ladder
+  - WaterZone
   layers:
   - Default
   - TransparentFX
@@ -16,7 +19,7 @@ TagManager:
   - Water
   - UI
   - Platform
-  - 
+  - Ladder
   - 
   - 
   - 

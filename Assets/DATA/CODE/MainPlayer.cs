@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     private float _moveSpeed = 5f;
     [SerializeField]
     private float _jumpForce = 5f;
+    [SerializeField]
+    private float _leoSpeed = 2f;
+    private bool isClimbing = false; // Biến mới để theo dõi trạng thái leo cầu thang
 
     Rigidbody2D _myRigidbody;
     private bool _isMovingRight = true;
@@ -49,6 +52,13 @@ public class Player : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _scoretext;
     private static int score = 0; // static de qua man 2 ko mat
+
+    // Biến cho xử lý đuối nước
+    [SerializeField]
+    private float drowningTime = 5f; // Thời gian trước khi nhân vật đuối nước
+    private float drowningTimer = 0f;
+    private bool isInWater = false;
+
     void Start()
     {
         _myRigidbody = GetComponent<Rigidbody2D>();
@@ -69,6 +79,8 @@ public class Player : MonoBehaviour
         jump();
         ATK();
         Fire();
+        LeoCT();
+        Drowning();
     }
     private void move()
     {
@@ -138,6 +150,54 @@ public class Player : MonoBehaviour
             _animator.SetBool("ATK", false);
         }
     }
+
+    //private void LeoCT()
+    //{
+    //    if (_myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+    //    {
+    //        Debug.Log("Da va cham ladder");
+    //        _myRigidbody.gravityScale = 0;
+    //        if (Input.GetKey(KeyCode.A))
+    //        {
+    //            _animator.SetBool("LeoCT", true);
+    //            _myRigidbody.velocity = Vector2.up * _leoSpeed;
+    //        }
+    //        else if (!Input.GetKey(KeyCode.A))
+    //        {
+    //            //_Animator.SetBool("isclimb", true);
+    //            _myRigidbody.velocity = Vector2.zero;
+    //        }
+    //        else if (Input.GetKey(KeyCode.S))
+    //        {
+    //            _animator.SetBool("LeoCT", true);
+    //            _myRigidbody.velocity = Vector2.down * _leoSpeed;
+    //        }
+    //        else
+    //        {
+    //            _animator.SetBool("LeoCT", false);
+    //        }
+
+    //    }
+    //}
+    private void LeoCT()
+    {
+        if (_myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
+        {
+            _myRigidbody.gravityScale = 0;
+            isClimbing = true;
+
+            float verticalInput = Input.GetAxis("Vertical");
+            _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, verticalInput * _leoSpeed);
+
+            _animator.SetBool("LeoCT", verticalInput != 0);
+        }
+        else
+        {
+            _myRigidbody.gravityScale = 1;
+            isClimbing = false;
+            _animator.SetBool("LeoCT", false);
+        }
+    }
     private void Fire()
     {
         // nhan phim f ban dan
@@ -183,5 +243,51 @@ public class Player : MonoBehaviour
             // Làm biết mất xu 
             Destroy(other.gameObject);
         }
+        else if (other.gameObject.CompareTag("BayGai"))
+        {
+            TakeDamage(10);
+        }
+        else if (other.gameObject.CompareTag("WaterZone"))
+        {
+            isInWater = true;
+        }
     }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("WaterZone"))
+        {
+            isInWater = false;
+            drowningTimer = 0f;
+        }
+    }
+
+    private void Drowning()
+    {
+        if (isInWater)
+        {
+            drowningTimer += Time.deltaTime;
+            if (drowningTimer >= drowningTime)
+            {
+                TakeDamage(10);
+                drowningTimer = 0f;
+                Debug.Log("Nhân vật bị đuối nước!");
+            }
+        }
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _Hp -= damage;
+        _healthText.text = "Health: " + _Hp.ToString();
+        _healthSlider.value = _Hp;
+
+        if (_Hp <= 0)
+        {
+            // Xử lý khi nhân vật chết
+            Debug.Log("Nhân vật đã chết");
+            // Có thể thêm logic để restart game hoặc hiển thị màn hình game over
+        }
+    }
+
+
 }

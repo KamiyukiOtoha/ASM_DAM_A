@@ -24,21 +24,31 @@ public class Player : MonoBehaviour
     private float cooldownTime = 5f; // Thời gian hồi chiêu là 5 giây
     private float nextFireTime = 0f; // Thời gian tiếp theo có thể bắn
 
+
     // Quản lý số mạng nhân vật
     [SerializeField]
     private int _maxhp = 100;
     private static int _Hp;
     // Biến static là biến tĩnh(biến của class) 
-    // Tham chiếu đên Panel 
-    [SerializeField]
-    private GameObject _gameOverCanvas;
-
+    // Tham chiếu đên Panel
     [SerializeField]
     private TextMeshProUGUI _healthText; // Tham chiếu tới TextMeshProUGUI hiển thị mạng
 
     //thanh slider
     [SerializeField]
     private Slider _healthSlider;
+    // Phát nhạc 
+    // Tham chiếu đên audio sorce
+    // Tham chiếu đên Audioclip
+
+    private AudioSource _audioSource; //  TRình phát âm thanh 
+    [SerializeField]
+    private AudioClip _CoinSound; // Trình pháp nhạc
+
+    // Tham chiếu tới text dieem so
+    [SerializeField]
+    private TextMeshProUGUI _scoretext;
+    private static int score = 0; // static de qua man 2 ko mat
     void Start()
     {
         _myRigidbody = GetComponent<Rigidbody2D>();
@@ -48,9 +58,11 @@ public class Player : MonoBehaviour
         _Hp = 100;
         _healthSlider.maxValue = _Hp;
         _healthText.text = "Health: " + _Hp.ToString();
+        // Gan gia tri cho diem so
+        _scoretext.text = score.ToString();
+
     }
 
-   
     void Update()
     {
         move();
@@ -88,7 +100,7 @@ public class Player : MonoBehaviour
 
         transform.localScale = _isMovingRight ? new Vector2(1f, 1f) : new Vector2(-1f, 1f);
 
-        
+
     }
     private void jump()
     {
@@ -147,6 +159,29 @@ public class Player : MonoBehaviour
             onBullet.GetComponent<Rigidbody2D>().velocity = velocity;
             // Destroy Dan
             Destroy(onBullet, 2f);
+        }
+    }
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Coin"))
+        {
+            // Phát ra tiếng nhạc
+            //_audioSource.PlayOneShot(_CoinSound);
+            // Tăng Điểm
+            score += 10;
+            _scoretext.text = score.ToString();
+            if (_Hp < _maxhp)
+            {
+                // Cập nhật số mạng khi chạm vào đồng xu
+                _Hp += 10;
+                // Cập nhật hiển thị số mạng
+                _healthText.text = "Health: " + _Hp.ToString();
+                _healthSlider.value = _Hp;
+            }
+
+
+            // Làm biết mất xu 
+            Destroy(other.gameObject);
         }
     }
 }

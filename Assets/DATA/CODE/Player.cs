@@ -23,11 +23,31 @@ public class Player : MonoBehaviour
     public Transform guntransform; // Tham chieu vi tri sung
     private float cooldownTime = 5f; // Thời gian hồi chiêu là 5 giây
     private float nextFireTime = 0f; // Thời gian tiếp theo có thể bắn
+
+    // Quản lý số mạng nhân vật
+    [SerializeField]
+    private int _maxhp = 100;
+    private static int _Hp;
+    // Biến static là biến tĩnh(biến của class) 
+    // Tham chiếu đên Panel 
+    [SerializeField]
+    private GameObject _gameOverCanvas;
+
+    [SerializeField]
+    private TextMeshProUGUI _healthText; // Tham chiếu tới TextMeshProUGUI hiển thị mạng
+
+    //thanh slider
+    [SerializeField]
+    private Slider _healthSlider;
     void Start()
     {
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myFeetCollider = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
+
+        _Hp = 100;
+        _healthSlider.maxValue = _Hp;
+        _healthText.text = "Health: " + _Hp.ToString();
     }
 
    

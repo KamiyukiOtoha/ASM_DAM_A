@@ -83,7 +83,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.45833334, y: 0.5833333}
+  m_Size: {x: 0.30555555, y: 0.3888889}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -186,6 +186,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _jumpForce: 5
+  _leoSpeed: 2
   bulletPrefab: {fileID: 6841515173099318647, guid: 98dac2364c3dddc4194e97ee79f34485, type: 3}
   guntransform: {fileID: 1018431903726529952}
   _maxhp: 100
@@ -193,6 +194,7 @@ MonoBehaviour:
   _healthSlider: {fileID: 0}
   _CoinSound: {fileID: 0}
   _scoretext: {fileID: 0}
+  drowningTime: 5
 --- !u!1 &2608345299564195777
 GameObject:
   m_ObjectHideFlags: 0

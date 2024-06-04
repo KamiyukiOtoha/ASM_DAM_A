@@ -22,10 +22,10 @@ public class Player : MonoBehaviour
     CapsuleCollider2D _myFeetCollider;
     private Animator _animator;
 
-    public GameObject bulletPrefab; // Tham chieu vien dan
-    public Transform guntransform; // Tham chieu vi tri sung
-    private float cooldownTime = 5f; // Thời gian hồi chiêu là 5 giây
-    private float nextFireTime = 0f; // Thời gian tiếp theo có thể bắn
+    //public GameObject bulletPrefab; // Tham chieu vien dan
+    //public Transform guntransform; // Tham chieu vi tri sung
+    //private float cooldownTime = 5f; // Thời gian hồi chiêu là 5 giây
+    //private float nextFireTime = 0f; // Thời gian tiếp theo có thể bắn
 
 
     // Quản lý số mạng nhân vật
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     // Biến cho xử lý đuối nước
     [SerializeField]
-    private float drowningTime = 5f; // Thời gian trước khi nhân vật đuối nước
+    private float drowningTime = 2f; // Thời gian trước khi nhân vật đuối nước
     private float drowningTimer = 0f;
     private bool isInWater = false;
 
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         move();
         jump();
         ATK();
-        Fire();
+        //Fire();
         LeoCT();
         Drowning();
     }
@@ -160,29 +160,29 @@ public class Player : MonoBehaviour
             _animator.SetBool("LeoCT", false);
         }
     }
-    private void Fire()
-    {
-        // nhan phim f ban dan
-        if (Input.GetKeyDown(KeyCode.E) && Time.time > nextFireTime)
-        {
-            // cập nhật thời gian hồi chiêu
-            nextFireTime = Time.time + cooldownTime;
+    //private void Fire()
+    //{
+    //    // nhan phim f ban dan
+    //    if (Input.GetKeyDown(KeyCode.E) && Time.time > nextFireTime)
+    //    {
+    //        // cập nhật thời gian hồi chiêu
+    //        nextFireTime = Time.time + cooldownTime;
 
-            // tao ra vien dan tai vi tri sung
-            var onBullet = Instantiate(bulletPrefab, guntransform.position, Quaternion.identity);
+    //        // tao ra vien dan tai vi tri sung
+    //        var onBullet = Instantiate(bulletPrefab, guntransform.position, Quaternion.identity);
 
-            // Cho vien dan bay theo huong nhan vat
-            var velocity = new Vector2(15f, 0);
-            if (_isMovingRight == false)
-            {
-                velocity = new Vector2(-15f, 0);
-            }
+    //        // Cho vien dan bay theo huong nhan vat
+    //        var velocity = new Vector2(15f, 0);
+    //        if (_isMovingRight == false)
+    //        {
+    //            velocity = new Vector2(-15f, 0);
+    //        }
 
-            onBullet.GetComponent<Rigidbody2D>().velocity = velocity;
-            // Destroy Dan
-            Destroy(onBullet, 2f);
-        }
-    }
+    //        onBullet.GetComponent<Rigidbody2D>().velocity = velocity;
+    //        // Destroy Dan
+    //        Destroy(onBullet, 2f);
+    //    }
+    //}
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Coin"))
@@ -245,11 +245,18 @@ public class Player : MonoBehaviour
 
         if (_Hp <= 0)
         {
+
             // Xử lý khi nhân vật chết
             Debug.Log("Nhân vật đã chết");
             // Có thể thêm logic để restart game hoặc hiển thị màn hình game over
+            PauseButton.SetActive(false);
+            GameOverPanel.SetActive(true);
+            Time.timeScale = 0;
+            
         }
     }
 
+    [SerializeField] GameObject GameOverPanel;
+    [SerializeField] GameObject PauseButton;
 
 }

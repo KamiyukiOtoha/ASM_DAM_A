@@ -123,17 +123,6 @@ public class Player : MonoBehaviour
         }
         var veticalInput = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
         if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    _animator.SetBool("Jump", true);
-        //    _animator.SetBool("Irun", false);
-        //}
-        //else
-        //{
-        //    _animator.SetBool("Jump", false);
-
-        //}
-
-        //if (veticalInput > 0)
         {
             _myRigidbody.velocity = new Vector2(0, _jumpForce);
 
@@ -151,34 +140,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    //private void LeoCT()
-    //{
-    //    if (_myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
-    //    {
-    //        Debug.Log("Da va cham ladder");
-    //        _myRigidbody.gravityScale = 0;
-    //        if (Input.GetKey(KeyCode.A))
-    //        {
-    //            _animator.SetBool("LeoCT", true);
-    //            _myRigidbody.velocity = Vector2.up * _leoSpeed;
-    //        }
-    //        else if (!Input.GetKey(KeyCode.A))
-    //        {
-    //            //_Animator.SetBool("isclimb", true);
-    //            _myRigidbody.velocity = Vector2.zero;
-    //        }
-    //        else if (Input.GetKey(KeyCode.S))
-    //        {
-    //            _animator.SetBool("LeoCT", true);
-    //            _myRigidbody.velocity = Vector2.down * _leoSpeed;
-    //        }
-    //        else
-    //        {
-    //            _animator.SetBool("LeoCT", false);
-    //        }
-
-    //    }
-    //}
+    
     private void LeoCT()
     {
         if (_myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))

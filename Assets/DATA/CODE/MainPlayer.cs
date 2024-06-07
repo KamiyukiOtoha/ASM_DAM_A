@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
         move();
         jump();
         ATK();
-        //Fire();
+        Fire();
         LeoCT();
         Drowning();
     }
@@ -213,6 +213,10 @@ public class Player : MonoBehaviour
         {
             isInWater = true;
         }
+        else if (other.gameObject.CompareTag("Bullett"))
+        {
+            TakeDamage(10);
+        }
     }
     private void OnTriggerExit2D(Collider2D other)
     {
@@ -221,14 +225,7 @@ public class Player : MonoBehaviour
             isInWater = false;
             drowningTimer = 0f;
         }
-        if (other.gameObject.CompareTag("Bullett"))
-        {
-            // Biến mất viên đạn
-            Destroy(other.gameObject);
-
-            // Giảm máu
-            _Hp -= 5;
-        }
+       
     }
 
     private void Drowning()

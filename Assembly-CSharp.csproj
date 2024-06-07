@@ -108,6 +108,7 @@
     <Compile Include="Assets\DATA\CODE\DisplayUsername.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
     <Compile Include="Assets\DATA\RESORCE\Popipa\Character_1\Script\Player1Controller.cs" />
+    <Compile Include="Assets\Scenes\S1\Gate.cs" />
     <Compile Include="Assets\Scenes\S1\S1Data\A lot of useful icons_04\Scripts\dialogs\Inits\DialogInit.cs" />
     <Compile Include="Assets\Scenes\S1\LoginData\Login.cs" />
     <Compile Include="Assets\DATA\CODE\UserSession.cs" />

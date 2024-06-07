@@ -55,7 +55,7 @@ public class BOSS : MonoBehaviour
 
         // Tính hướng của đạn dựa trên vị trí của nhân vật
         Vector2 direction = (GameObject.FindGameObjectWithTag("Player").transform.position - bulletSpawnPointBoss.position).normalized;
-        bulletRb.velocity = direction * 10; // Tốc độ đạn
+        bulletRb.velocity = direction * 1; // Tốc độ đạn
 
         // Tắt animation tấn công sau khi bắn xong
         animatorBoss.SetBool("ATK", false);

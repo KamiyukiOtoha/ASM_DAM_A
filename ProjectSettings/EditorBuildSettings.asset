@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/S1/S1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/S4_Truong/S4.unity
+    guid: 2b443a3c31337bc40b410cb408b6a85b
   m_configObjects: {}

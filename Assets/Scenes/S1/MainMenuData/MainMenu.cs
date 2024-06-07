@@ -8,10 +8,11 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene("S1");
     }
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene("LoginMenu");
+        //Application.Quit();
     }
 }

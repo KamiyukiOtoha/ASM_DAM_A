@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1615511577086830389}
   m_Layer: 0
   m_Name: SkillE
-  m_TagString: Coin
+  m_TagString: Bullett
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

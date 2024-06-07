@@ -256,6 +256,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public int GetScore()
+    {
+        return score;
+    }
+
     [SerializeField] GameObject GameOverPanel;
     [SerializeField] GameObject PauseButton;
 

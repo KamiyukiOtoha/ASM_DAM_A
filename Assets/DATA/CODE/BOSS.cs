@@ -9,6 +9,7 @@ public class BOSS : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPointBoss; // Điểm xuất hiện của viên đạn
     [SerializeField] private Slider healthSliderBoss; // Thanh máu của boss
     [SerializeField] private TextMeshProUGUI _healthTextboss; // Tham chiếu tới TextMeshProUGUI hiển thị mạng
+    
 
     private bool isAttacking = false;
     private Animator animatorBoss;
@@ -25,6 +26,7 @@ public class BOSS : MonoBehaviour
         healthSliderBoss.maxValue = _maxhp;
         healthSliderBoss.value = _maxhp;
         _healthTextboss.text = "Health: " + _Hp.ToString();
+        
     }
 
     void Update()

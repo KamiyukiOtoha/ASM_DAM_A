@@ -9,6 +9,7 @@ public class BOSS : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPointBoss; // Điểm xuất hiện của viên đạn
     [SerializeField] private Slider healthSliderBoss; // Thanh máu của boss
     [SerializeField] private TextMeshProUGUI _healthTextboss; // Tham chiếu tới TextMeshProUGUI hiển thị mạng
+    
 
     private bool isAttacking = false;
     private Animator animatorBoss;
@@ -25,6 +26,7 @@ public class BOSS : MonoBehaviour
         healthSliderBoss.maxValue = _maxhp;
         healthSliderBoss.value = _maxhp;
         _healthTextboss.text = "Health: " + _Hp.ToString();
+        
     }
 
     void Update()
@@ -47,7 +49,7 @@ public class BOSS : MonoBehaviour
         else if (other.gameObject.CompareTag("Bullett"))
         {
             // Nếu va chạm với đạn
-            TakeDamage(10); // Giảm máu của boss
+            TakeDamage(1000); // Giảm máu của boss
                             // Destroy(other.gameObject); // Hủy đối tượng đạn
         }
     }
@@ -71,7 +73,7 @@ public class BOSS : MonoBehaviour
 
         // Tính hướng của đạn dựa trên vị trí của nhân vật
         Vector2 direction = (GameObject.FindGameObjectWithTag("Player").transform.position - bulletSpawnPointBoss.position).normalized;
-        bulletRb.velocity = direction * 0.2f; // Giảm tốc độ của đạn
+        bulletRb.velocity = direction * 0.9f; // Giảm tốc độ của đạn
 
         // Hủy đạn sau 2 giây
         Destroy(bullet, 5f);
@@ -96,6 +98,7 @@ public class BOSS : MonoBehaviour
         if (_Hp <= 0)
         {
             // Xử lý khi boss bị hết máu
+            Destroy(gameObject);
         }
     }
 }

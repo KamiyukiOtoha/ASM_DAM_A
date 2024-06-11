@@ -10,6 +10,7 @@ public class Gate : MonoBehaviour
     //[SerializeField] GameObject _loadingCanvat;
   //  [SerializeField] Slider _slider;
    // [SerializeField] TextMeshProUGUI _textMeshProUGUI;
+   
 
     private void Start()
     {

@@ -15,8 +15,8 @@ public class Memory : MonoBehaviour
     //TextMeshProUGUI _highTime;
     //[SerializeField]
     //TextMeshProUGUI _lowTime;
-    //[SerializeField] private GameObject _Boss;
-    //[SerializeField] private GameObject _CanavasGame;
+    [SerializeField] private GameObject _Boss;
+    [SerializeField] private GameObject _CanavasGame;
     private void Start()
     {
         _player = FindObjectOfType<Player>();
@@ -24,14 +24,16 @@ public class Memory : MonoBehaviour
     void Update()
     {
         // tạm thời nhấn nút esc để thực hiện lưu dữ liệu 
-        //if (_Boss == null)
-        //{
-            //_CanavasGame.SetActive(true);
+        if (_Boss == null)
+        {
+            _CanavasGame.SetActive(true);
             ReadDataFromFile(); // đọc dữ liệu
             Showdata();
             WriteDataToFile(); // 
+
             Time.timeScale = 0;
-        //}
+        }
+        
         // thay vì kill boss
     }
 

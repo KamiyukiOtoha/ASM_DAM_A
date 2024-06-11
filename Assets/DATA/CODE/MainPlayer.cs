@@ -43,11 +43,19 @@ public class Player : MonoBehaviour
     // Phát nhạc 
     // Tham chiếu đên audio sorce
     // Tham chiếu đên Audioclip
-
+    
     private AudioSource _audioSource; //  TRình phát âm thanh 
     [SerializeField]
     private AudioClip _CoinSound; // Trình pháp nhạc
+    [SerializeField]
+    private AudioClip _RunSound;
+    [SerializeField]
+    private AudioClip _JumpSound;
+    [SerializeField]
+    private AudioClip _SkillSound;
+    
 
+    
     // Tham chiếu tới text dieem so
     [SerializeField]
     private TextMeshProUGUI _scoretext;
@@ -64,16 +72,14 @@ public class Player : MonoBehaviour
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myFeetCollider = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
-
+        _audioSource = GetComponent<AudioSource>();
+        
         _Hp = 100;
         _healthSlider.maxValue = _Hp;
         _healthText.text = "Health: " + _Hp.ToString();
-
-      
         // Gan gia tri cho diem so
+        score = 0;
         _scoretext.text = score.ToString();
-        
-
     }
 
     void Update()
@@ -86,24 +92,27 @@ public class Player : MonoBehaviour
     }
     private void move()
     {
+        
 
         var horizontalInput = Input.GetAxis("Horizontal");
         transform.localPosition += new Vector3(horizontalInput, 0, 0) * _moveSpeed * Time.deltaTime;
         if (horizontalInput > 0)
         {
+            _audioSource.PlayOneShot(_RunSound);
             _isMovingRight = true;
 
             _animator.SetBool("Irun", true);
+          
 
 
         }
         else if (horizontalInput < 0)
         {
-
+            _audioSource.PlayOneShot(_RunSound);
             _isMovingRight = false;
 
             _animator.SetBool("Irun", true);
-
+            
         }
         else
         {
@@ -126,8 +135,10 @@ public class Player : MonoBehaviour
         var veticalInput = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            _audioSource.PlayOneShot(_JumpSound);
             _animator.SetTrigger("Jumping");
             _myRigidbody.velocity = new Vector2(0, _jumpForce);
+            
 
         }
     }
@@ -150,6 +161,7 @@ public class Player : MonoBehaviour
             if (verticalInput != 0)
             {
                 _animator.SetTrigger("StartClimb");
+                _audioSource.PlayOneShot(_RunSound);
             }
         }
         else
@@ -166,8 +178,10 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && Time.time > nextFireTime)
         {
+            _audioSource.PlayOneShot(_SkillSound);
             _animator.SetTrigger("ATKT");
             nextFireTime = Time.time + cooldownTime;
+            
         }
     }
 
@@ -194,7 +208,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Coin"))
         {
             // Phát ra tiếng nhạc
-            //_audioSource.PlayOneShot(_CoinSound);
+            _audioSource.PlayOneShot(_CoinSound);
             // Tăng Điểm
             score += 10;
             _scoretext.text = score.ToString();
@@ -271,7 +285,7 @@ public class Player : MonoBehaviour
 
    
 
-            public int GetScore()
+    public int GetScore()
     {
         return score;
     }

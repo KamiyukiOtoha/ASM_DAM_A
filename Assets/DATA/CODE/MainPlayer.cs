@@ -68,8 +68,11 @@ public class Player : MonoBehaviour
         _Hp = 100;
         _healthSlider.maxValue = _Hp;
         _healthText.text = "Health: " + _Hp.ToString();
+
+      
         // Gan gia tri cho diem so
         _scoretext.text = score.ToString();
+        
 
     }
 
@@ -77,7 +80,6 @@ public class Player : MonoBehaviour
     {
         move();
         jump();
-       // ATK();
         Fire();
         LeoCT();
         Drowning();
@@ -124,23 +126,14 @@ public class Player : MonoBehaviour
         var veticalInput = Input.GetKeyDown(KeyCode.Space) ? 1 : 0;
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            _animator.SetTrigger("Jumping");
             _myRigidbody.velocity = new Vector2(0, _jumpForce);
 
         }
     }
-    //private void ATK()
-    //{
-    //    if (Input.GetKey(KeyCode.E))
-    //    {
-    //        _animator.SetBool("ATK", true);
-    //    }
-    //    else
-    //    {
-    //        _animator.SetBool("ATK", false);
-    //    }
-    //}
 
-    
+
+
     private void LeoCT()
     {
         if (_myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
@@ -151,13 +144,22 @@ public class Player : MonoBehaviour
             float verticalInput = Input.GetAxis("Vertical");
             _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, verticalInput * _leoSpeed);
 
-            _animator.SetBool("LeoCT", verticalInput != 0);
+          
+
+            // Kích hoạt trigger khi bắt đầu leo
+            if (verticalInput != 0)
+            {
+                _animator.SetTrigger("StartClimb");
+            }
         }
         else
         {
             _myRigidbody.gravityScale = 1;
             isClimbing = false;
-            _animator.SetBool("LeoCT", false);
+          
+
+            // Kích hoạt trigger khi kết thúc leo
+            _animator.SetTrigger("EndClimb");
         }
     }
     private void Fire()
@@ -217,7 +219,7 @@ public class Player : MonoBehaviour
         {
             isInWater = true;
         }
-        else if (other.gameObject.CompareTag("Bullett"))
+        else if (other.gameObject.CompareTag("BullettBoss"))
         {
             TakeDamage(10);
         }
@@ -257,6 +259,7 @@ public class Player : MonoBehaviour
 
             // Xử lý khi nhân vật chết
             Debug.Log("Nhân vật đã chết");
+            
             // Có thể thêm logic để restart game hoặc hiển thị màn hình game over
             PauseButton.SetActive(false);
             GameOverPanel.SetActive(true);

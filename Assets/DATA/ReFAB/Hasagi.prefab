@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6841515173099318647
+--- !u!1 &2934891704037940435
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,40 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4482965287694184557}
-  - component: {fileID: 4054887919927076222}
-  - component: {fileID: 6697637020412048073}
-  - component: {fileID: 6799436499150299828}
-  - component: {fileID: 1615511577086830389}
+  - component: {fileID: 8935326058200393427}
+  - component: {fileID: 2104315421273295432}
+  - component: {fileID: 367931197311331575}
+  - component: {fileID: 4625871031682939445}
+  - component: {fileID: 1749627722636594127}
   m_Layer: 0
-  m_Name: SkillE
-  m_TagString: Bullett
+  m_Name: Hasagi
+  m_TagString: BullettBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4482965287694184557
+--- !u!4 &8935326058200393427
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841515173099318647}
+  m_GameObject: {fileID: 2934891704037940435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.8325887, y: -1.9299188, z: 0}
+  m_LocalPosition: {x: -6.059405, y: -2.133229, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4054887919927076222
+--- !u!212 &2104315421273295432
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841515173099318647}
+  m_GameObject: {fileID: 2934891704037940435}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -76,28 +76,28 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 76146414, guid: 1f71c83343135d942bf2b18d331c6e56, type: 3}
+  m_Sprite: {fileID: -847249361, guid: 578f1b4fc71b3244cb045d81635b017b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &6697637020412048073
+--- !u!95 &367931197311331575
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841515173099318647}
+  m_GameObject: {fileID: 2934891704037940435}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 485ee4cc711037a4ba4d8d3db6c01724, type: 2}
+  m_Controller: {fileID: 9100000, guid: 60348630d75c4c84b803cef3d873245f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -108,13 +108,13 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!58 &6799436499150299828
-CircleCollider2D:
+--- !u!70 &4625871031682939445
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841515173099318647}
+  m_GameObject: {fileID: 2934891704037940435}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -141,16 +141,16 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.16
---- !u!50 &1615511577086830389
+  m_Size: {x: 0.64, y: 0.64}
+  m_Direction: 0
+--- !u!50 &1749627722636594127
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6841515173099318647}
+  m_GameObject: {fileID: 2934891704037940435}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0

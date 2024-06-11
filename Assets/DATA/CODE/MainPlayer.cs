@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
 
     public GameObject bulletPrefab; // Tham chieu vien dan
     public Transform guntransform; // Tham chieu vi tri sung
-    private float cooldownTime = 5f; // Thời gian hồi chiêu là 5 giây
+    private float cooldownTime = 2f; // Thời gian hồi chiêu là 5 giây
     private float nextFireTime = 0f; // Thời gian tiếp theo có thể bắn
 
 
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour
     {
         move();
         jump();
-        ATK();
+       // ATK();
         Fire();
         LeoCT();
         Drowning();
@@ -128,17 +128,17 @@ public class Player : MonoBehaviour
 
         }
     }
-    private void ATK()
-    {
-        if (Input.GetKey(KeyCode.E))
-        {
-            _animator.SetBool("ATK", true);
-        }
-        else
-        {
-            _animator.SetBool("ATK", false);
-        }
-    }
+    //private void ATK()
+    //{
+    //    if (Input.GetKey(KeyCode.E))
+    //    {
+    //        _animator.SetBool("ATK", true);
+    //    }
+    //    else
+    //    {
+    //        _animator.SetBool("ATK", false);
+    //    }
+    //}
 
     
     private void LeoCT()
@@ -162,26 +162,30 @@ public class Player : MonoBehaviour
     }
     private void Fire()
     {
-        // nhan phim f ban dan
         if (Input.GetKeyDown(KeyCode.E) && Time.time > nextFireTime)
         {
-            // cập nhật thời gian hồi chiêu
+            _animator.SetTrigger("ATKT");
             nextFireTime = Time.time + cooldownTime;
-
-            // tao ra vien dan tai vi tri sung
-            var onBullet = Instantiate(bulletPrefab, guntransform.position, Quaternion.identity);
-
-            // Cho vien dan bay theo huong nhan vat
-            var velocity = new Vector2(15f, 0);
-            if (_isMovingRight == false)
-            {
-                velocity = new Vector2(-15f, 0);
-            }
-
-            onBullet.GetComponent<Rigidbody2D>().velocity = velocity;
-            // Destroy Dan
-            Destroy(onBullet, 2f);
         }
+    }
+
+    // Phương thức này sẽ được gọi bởi sự kiện trong hoạt ảnh
+    private void FireBullet()
+    {
+        // Tạo viên đạn tại vị trí súng
+        var onBullet = Instantiate(bulletPrefab, guntransform.position, Quaternion.identity);
+
+        // Thiết lập vận tốc cho viên đạn dựa trên hướng của nhân vật
+        var velocity = new Vector2(15f, 0);
+        if (_isMovingRight == false)
+        {
+            velocity = new Vector2(-15f, 0);
+        }
+
+        onBullet.GetComponent<Rigidbody2D>().velocity = velocity;
+
+        // Hủy viên đạn sau 2 giây
+        Destroy(onBullet, 2f);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {

@@ -22,13 +22,13 @@ AnimationClip:
     curve:
     - time: 0
       value: {fileID: 1733343401, guid: fad5f476e97866c4fb4492d5aa47a66b, type: 3}
-    - time: 0.06666667
+    - time: 0.35
       value: {fileID: 1681011940, guid: fad5f476e97866c4fb4492d5aa47a66b, type: 3}
-    - time: 0.13333334
+    - time: 0.5833333
       value: {fileID: -884675095, guid: fad5f476e97866c4fb4492d5aa47a66b, type: 3}
-    - time: 0.18333334
+    - time: 0.81666666
       value: {fileID: 1704699194, guid: fad5f476e97866c4fb4492d5aa47a66b, type: 3}
-    - time: 0.25
+    - time: 1.1666666
       value: {fileID: 1213745422, guid: fad5f476e97866c4fb4492d5aa47a66b, type: 3}
     attribute: m_Sprite
     path: 
@@ -62,7 +62,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.26666668
+    m_StopTime: 1.1833333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -81,4 +81,11 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 1.15
+    functionName: FireBullet
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

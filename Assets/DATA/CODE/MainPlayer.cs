@@ -43,10 +43,16 @@ public class Player : MonoBehaviour
     // Phát nhạc 
     // Tham chiếu đên audio sorce
     // Tham chiếu đên Audioclip
-
-    private AudioSource _audioSource; //  TRình phát âm thanh 
+    
+   public AudioSource _audioSource; //  TRình phát âm thanh 
     [SerializeField]
     private AudioClip _CoinSound; // Trình pháp nhạc
+    [SerializeField]
+    private AudioClip _RunSound;
+    [SerializeField]
+    private AudioClip _JumpSound;
+    [SerializeField]
+    private AudioClip _SkillSound;
 
     // Tham chiếu tới text dieem so
     [SerializeField]
@@ -64,16 +70,13 @@ public class Player : MonoBehaviour
         _myRigidbody = GetComponent<Rigidbody2D>();
         _myFeetCollider = GetComponent<CapsuleCollider2D>();
         _animator = GetComponent<Animator>();
-
+        _audioSource = GetComponent<AudioSource>();
         _Hp = 100;
         _healthSlider.maxValue = _Hp;
         _healthText.text = "Health: " + _Hp.ToString();
-
-      
         // Gan gia tri cho diem so
+        score = 0;
         _scoretext.text = score.ToString();
-        
-
     }
 
     void Update()
@@ -86,6 +89,7 @@ public class Player : MonoBehaviour
     }
     private void move()
     {
+        
 
         var horizontalInput = Input.GetAxis("Horizontal");
         transform.localPosition += new Vector3(horizontalInput, 0, 0) * _moveSpeed * Time.deltaTime;
@@ -94,6 +98,7 @@ public class Player : MonoBehaviour
             _isMovingRight = true;
 
             _animator.SetBool("Irun", true);
+            //_audioSource.PlayOneShot(_RunSound);
 
 
         }
@@ -103,7 +108,7 @@ public class Player : MonoBehaviour
             _isMovingRight = false;
 
             _animator.SetBool("Irun", true);
-
+            //_audioSource.PlayOneShot(_RunSound);
         }
         else
         {
@@ -128,6 +133,7 @@ public class Player : MonoBehaviour
         {
             _animator.SetTrigger("Jumping");
             _myRigidbody.velocity = new Vector2(0, _jumpForce);
+          //  _audioSource.PlayOneShot(_JumpSound);
 
         }
     }
@@ -150,6 +156,7 @@ public class Player : MonoBehaviour
             if (verticalInput != 0)
             {
                 _animator.SetTrigger("StartClimb");
+               // _audioSource.PlayOneShot(_RunSound);
             }
         }
         else
@@ -168,6 +175,7 @@ public class Player : MonoBehaviour
         {
             _animator.SetTrigger("ATKT");
             nextFireTime = Time.time + cooldownTime;
+          //  _audioSource.PlayOneShot(_SkillSound);
         }
     }
 
@@ -271,7 +279,7 @@ public class Player : MonoBehaviour
 
    
 
-            public int GetScore()
+    public int GetScore()
     {
         return score;
     }

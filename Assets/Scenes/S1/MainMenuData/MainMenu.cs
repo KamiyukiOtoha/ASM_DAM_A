@@ -17,4 +17,9 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("LoginMenu");
         //Application.Quit();
     }
+    public void EXAP()
+    {
+       
+        Application.Quit();
+    }
 }

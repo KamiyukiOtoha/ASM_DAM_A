@@ -10,6 +10,7 @@ public class BOSS : MonoBehaviour
     [SerializeField] private Slider healthSliderBoss; // Thanh máu của boss
     [SerializeField] private TextMeshProUGUI _healthTextboss; // Tham chiếu tới TextMeshProUGUI hiển thị mạng
     [SerializeField] private GameObject _CanavasGame;
+    [SerializeField] private CapsuleCollider2D _capsuleCollider;
 
     private bool isAttacking = false;
     private Animator animatorBoss;
@@ -21,12 +22,12 @@ public class BOSS : MonoBehaviour
 
     void Start()
     {
+        _capsuleCollider = GetComponent<CapsuleCollider2D>();
         animatorBoss = GetComponent<Animator>();
         _Hp = _maxhp;
         healthSliderBoss.maxValue = _maxhp;
         healthSliderBoss.value = _maxhp;
         _healthTextboss.text = "Health: " + _Hp.ToString();
-        
     }
 
     void Update()
@@ -41,16 +42,18 @@ public class BOSS : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Bullett"))
+        {
+            // Nếu va chạm với đạn
+            TakeDamage(1000); // Giảm máu của boss
+            Destroy(other.gameObject); // Hủy đối tượng đạn
+            // Boss sẽ tấn công ngay lập tức khi bị trúng đạn
+            ShootBoss();
+        }
         if (other.gameObject.CompareTag("Player"))
         {
             // Khi nhân vật vào phạm vi tấn công của boss
             isAttacking = true;
-        }
-        else if (other.gameObject.CompareTag("Bullett"))
-        {
-            // Nếu va chạm với đạn
-            TakeDamage(1000); // Giảm máu của boss
-                             Destroy(other.gameObject); // Hủy đối tượng đạn
         }
     }
 
@@ -75,7 +78,7 @@ public class BOSS : MonoBehaviour
         Vector2 direction = (GameObject.FindGameObjectWithTag("Player").transform.position - bulletSpawnPointBoss.position).normalized;
         bulletRb.velocity = direction * 0.9f; // Giảm tốc độ của đạn
 
-        // Hủy đạn sau 2 giây
+        // Hủy đạn sau 5 giây
         Destroy(bullet, 5f);
 
         // Tắt animation tấn công sau khi bắn xong

@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     private float _jumpForce = 5f;
     [SerializeField]
     private float _leoSpeed = 2f;
-    private bool isClimbing = false; // Biến mới để theo dõi trạng thái leo cầu thang
+   // private bool isClimbing = false; // Biến mới để theo dõi trạng thái leo cầu thang
 
     Rigidbody2D _myRigidbody;
     private bool _isMovingRight = true;
@@ -26,6 +26,16 @@ public class Player : MonoBehaviour
     public Transform guntransform; // Tham chieu vi tri sung
     private float cooldownTime = 2f; // Thời gian hồi chiêu là 5 giây
     private float nextFireTime = 0f; // Thời gian tiếp theo có thể bắn
+
+    public GameObject bulletPrefabQ; // Tham chieu vien dan
+    public Transform guntransformQ; // Tham chieu vi tri sung
+    private float cooldownTimeQ = 3f; // Thời gian hồi chiêu là 5 giây
+    private float nextFireTimeQ = 0f; // Thời gian tiếp theo có thể bắn
+
+    public GameObject bulletPrefabR; // Tham chieu vien dan
+    public Transform guntransformR; // Tham chieu vi tri sung
+    private float cooldownTimeR = 4f; // Thời gian hồi chiêu là 5 giây
+    private float nextFireTimeR = 0f; // Thời gian tiếp theo có thể bắn
 
 
     // Quản lý số mạng nhân vật
@@ -87,6 +97,8 @@ public class Player : MonoBehaviour
         move();
         jump();
         Fire();
+        FireQ();
+        FireR();
         LeoCT();
         Drowning();
     }
@@ -150,7 +162,7 @@ public class Player : MonoBehaviour
         if (_myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")))
         {
             _myRigidbody.gravityScale = 0;
-            isClimbing = true;
+          //  isClimbing = true;
 
             float verticalInput = Input.GetAxis("Vertical");
             _myRigidbody.velocity = new Vector2(_myRigidbody.velocity.x, verticalInput * _leoSpeed);
@@ -167,7 +179,7 @@ public class Player : MonoBehaviour
         else
         {
             _myRigidbody.gravityScale = 1;
-            isClimbing = false;
+           // isClimbing = false;
           
 
             // Kích hoạt trigger khi kết thúc leo
@@ -181,7 +193,31 @@ public class Player : MonoBehaviour
             _audioSource.PlayOneShot(_SkillSound);
             _animator.SetTrigger("ATKT");
             nextFireTime = Time.time + cooldownTime;
+            FireBullet();
             
+        }
+    }
+
+    private void FireQ()
+    {
+        if (Input.GetKeyDown(KeyCode.Q) && Time.time > nextFireTimeQ)
+        {
+            _audioSource.PlayOneShot(_SkillSound);
+            _animator.SetTrigger("ATKT");
+            nextFireTimeQ = Time.time + cooldownTimeQ;
+            FireBullet();
+
+        }
+    }
+    private void FireR()
+    {
+        if (Input.GetKeyDown(KeyCode.R) && Time.time > nextFireTimeR)
+        {
+            _audioSource.PlayOneShot(_SkillSound);
+            _animator.SetTrigger("ATKT");
+            nextFireTimeR = Time.time + cooldownTimeR;
+            FireBullet();
+
         }
     }
 
@@ -190,6 +226,40 @@ public class Player : MonoBehaviour
     {
         // Tạo viên đạn tại vị trí súng
         var onBullet = Instantiate(bulletPrefab, guntransform.position, Quaternion.identity);
+
+        // Thiết lập vận tốc cho viên đạn dựa trên hướng của nhân vật
+        var velocity = new Vector2(5f, 0);
+        if (_isMovingRight == false)
+        {
+            velocity = new Vector2(-5f, 0);
+        }
+
+        onBullet.GetComponent<Rigidbody2D>().velocity = velocity;
+
+        // Hủy viên đạn sau 2 giây
+        Destroy(onBullet, 2f);
+    }
+    private void FireBulletQ()
+    {
+        // Tạo viên đạn tại vị trí súng
+        var onBullet = Instantiate(bulletPrefabQ, guntransformQ.position, Quaternion.identity);
+
+        // Thiết lập vận tốc cho viên đạn dựa trên hướng của nhân vật
+        var velocity = new Vector2(5f, 0);
+        if (_isMovingRight == false)
+        {
+            velocity = new Vector2(-5f, 0);
+        }
+
+        onBullet.GetComponent<Rigidbody2D>().velocity = velocity;
+
+        // Hủy viên đạn sau 2 giây
+        Destroy(onBullet, 2f);
+    }
+    private void FireBulletR()
+    {
+        // Tạo viên đạn tại vị trí súng
+        var onBullet = Instantiate(bulletPrefabR, guntransformR.position, Quaternion.identity);
 
         // Thiết lập vận tốc cho viên đạn dựa trên hướng của nhân vật
         var velocity = new Vector2(5f, 0);

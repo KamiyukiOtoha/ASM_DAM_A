@@ -50,7 +50,7 @@ public class BOSS : MonoBehaviour
         {
             // Nếu va chạm với đạn
             TakeDamage(1000); // Giảm máu của boss
-                            // Destroy(other.gameObject); // Hủy đối tượng đạn
+                             Destroy(other.gameObject); // Hủy đối tượng đạn
         }
     }
 

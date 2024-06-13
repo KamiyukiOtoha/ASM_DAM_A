@@ -9,7 +9,7 @@ public class BOSS : MonoBehaviour
     [SerializeField] private Transform bulletSpawnPointBoss; // Điểm xuất hiện của viên đạn
     [SerializeField] private Slider healthSliderBoss; // Thanh máu của boss
     [SerializeField] private TextMeshProUGUI _healthTextboss; // Tham chiếu tới TextMeshProUGUI hiển thị mạng
-    
+    [SerializeField] private GameObject _CanavasGame;
 
     private bool isAttacking = false;
     private Animator animatorBoss;
@@ -99,6 +99,7 @@ public class BOSS : MonoBehaviour
         {
             // Xử lý khi boss bị hết máu
             Destroy(gameObject);
+            _CanavasGame.SetActive(true);
         }
     }
 }

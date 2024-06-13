@@ -192,10 +192,10 @@ public class Player : MonoBehaviour
         var onBullet = Instantiate(bulletPrefab, guntransform.position, Quaternion.identity);
 
         // Thiết lập vận tốc cho viên đạn dựa trên hướng của nhân vật
-        var velocity = new Vector2(15f, 0);
+        var velocity = new Vector2(5f, 0);
         if (_isMovingRight == false)
         {
-            velocity = new Vector2(-15f, 0);
+            velocity = new Vector2(-5f, 0);
         }
 
         onBullet.GetComponent<Rigidbody2D>().velocity = velocity;

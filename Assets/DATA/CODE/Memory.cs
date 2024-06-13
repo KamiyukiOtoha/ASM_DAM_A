@@ -25,16 +25,16 @@ public class Memory : MonoBehaviour
     void Update()
     {
         // tạm thời nhấn nút esc để thực hiện lưu dữ liệu 
-        if (_Boss == null)
-        {
+        //if (_Boss == null)
+        //{
             
-            _CanavasGame.SetActive(true);
-            ReadDataFromFile(); // đọc dữ liệu
-            Showdata();
-            WriteDataToFile(); // 
+        //    //_CanavasGame.SetActive(true);
+        //    //ReadDataFromFile(); // đọc dữ liệu
+        //    //Showdata();
+        //    //WriteDataToFile(); // 
 
-            Time.timeScale = 0;
-        }
+        //    //Time.timeScale = 0;
+        //}
         ReadDataFromFile(); // đọc dữ liệu
         Showdata();
         WriteDataToFile(); // 
